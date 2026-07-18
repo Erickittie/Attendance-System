@@ -9,7 +9,7 @@ def get_student(id_number):
         SELECT *
         FROM students
         WHERE id_number=%s
-    """, (id_number,))
+    """,(id_number,))
 
     student = cursor.fetchone()
 

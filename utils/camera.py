@@ -1,25 +1,12 @@
 import cv2
 
+
 def open_camera():
-    cap = cv2.VideoCapture(0)
 
-    if not cap.isOpened():
-        print("Error: Cannot open camera.")
-        return
+    camera = cv2.VideoCapture(0)
 
-    while True:
-        ret, frame = cap.read()
+    if not camera.isOpened():
 
-        if not ret:
-            print("Error: Cannot read frame.")
-            break
+        raise Exception("Cannot open camera.")
 
-        cv2.imshow("Attendance Camera", frame)
-
-        key = cv2.waitKey(1)
-
-        if key == 27:   # ESC
-            break
-
-    cap.release()
-    cv2.destroyAllWindows()
+    return camera

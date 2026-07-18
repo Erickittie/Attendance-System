@@ -1,0 +1,3 @@
+attendance_id,id_number,course_code,room_name,attendance_date,time_in,status,created_at
+2,2022008683,IT403,Laboratory 1,2026-07-18,0 days 18:14:27,Present,2026-07-18 18:14:27
+1,2022008683,IT403,Laboratory 1,2026-07-15,0 days 12:40:24,Present,2026-07-15 12:40:24

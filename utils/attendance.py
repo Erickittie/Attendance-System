@@ -1,29 +1,39 @@
-from datetime import datetime
+from datetime import date, datetime
 from utils.database import get_connection
 
-def mark_attendance(id_number, course_code, room_name):
 
+def already_attended(id_number, course_code):
     conn = get_connection()
     cursor = conn.cursor()
 
-    today = datetime.now().date()
-    now = datetime.now().time()
-
-    # Prevent duplicate attendance for the same class on the same day
     cursor.execute("""
-        SELECT attendance_id
+        SELECT COUNT(*)
         FROM attendance
-        WHERE id_number=%s
-        AND course_code=%s
-        AND attendance_date=%s
-    """, (id_number, course_code, today))
+        WHERE id_number = %s
+        AND course_code = %s
+        AND attendance_date = %s
+    """,
+    (
+        id_number,
+        course_code,
+        date.today()
+    ))
 
-    existing = cursor.fetchone()
+    count = cursor.fetchone()[0]
 
-    if existing:
-        cursor.close()
-        conn.close()
+    cursor.close()
+    conn.close()
+
+    return count > 0
+
+
+def mark_attendance(id_number, course_code, room_name):
+
+    if already_attended(id_number, course_code):
         return False
+
+    conn = get_connection()
+    cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO attendance
@@ -36,16 +46,14 @@ def mark_attendance(id_number, course_code, room_name):
             status
         )
         VALUES
-        (
-            %s,%s,%s,%s,%s,%s
-        )
+        (%s,%s,%s,%s,%s,%s)
     """,
     (
         id_number,
         course_code,
         room_name,
-        today,
-        now,
+        date.today(),
+        datetime.now().strftime("%H:%M:%S"),
         "Present"
     ))
 
