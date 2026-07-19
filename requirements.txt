@@ -1,6 +1,0 @@
-flask
-opencv-python
-opencv-contrib-python
-numpy
-mysql-connector-python
-pandas
