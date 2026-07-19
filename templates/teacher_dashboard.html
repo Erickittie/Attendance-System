@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+Teacher Dashboard
+</title>
+
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+
+<h1>
+📚 Teacher Attendance Dashboard
+</h1>
+
+
+<a href="/student" class="btn">
+Student Scanner
+</a>
+
+
+</div>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+Select Class Schedule
+</h2>
+
+
+<p>
+Choose the class you want to monitor.
+</p>
+
+
+<br>
+
+
+
+<div class="schedule-grid">
+
+
+{% for s in schedules %}
+
+
+<div class="schedule-card">
+
+
+<h3>
+
+{{s.course_code}}
+
+</h3>
+
+
+<h4>
+
+{{s.course_name}}
+
+</h4>
+
+
+
+<div class="info">
+
+
+📅 {{s.day_of_week}}
+
+<br>
+
+
+⏰
+
+{{s.start_time}}
+
+-
+
+{{s.end_time}}
+
+
+<br>
+
+
+🏫 Room:
+
+{{s.room}}
+
+
+</div>
+
+
+
+<br>
+
+
+
+<a
+
+href="/teacher/attendance?schedule_id={{s.schedule_id}}"
+
+class="btn">
+
+View Attendance
+
+</a>
+
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

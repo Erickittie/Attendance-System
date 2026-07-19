@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+Student ID Scanner
+</title>
+
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+<style>
+
+
+body {
+
+    background:#f3f4f6;
+
+}
+
+
+
+.header {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 40px;
+
+}
+
+
+
+.container {
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.card {
+
+
+    background:white;
+
+    width:900px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.1);
+
+    text-align:center;
+
+}
+
+
+
+
+.schedule-info {
+
+
+    background:#eff6ff;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+.camera-box {
+
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.camera-box img {
+
+
+    width:640px;
+
+    height:480px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    border:5px solid #2563eb;
+
+
+}
+
+
+
+
+.result {
+
+
+    margin-top:25px;
+
+    padding:25px;
+
+    background:#f9fafb;
+
+    border-radius:15px;
+
+
+}
+
+
+
+.student-name {
+
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#2563eb;
+
+
+}
+
+
+
+.student-id {
+
+
+    font-size:20px;
+
+    margin-top:10px;
+
+
+}
+
+
+
+.status {
+
+
+    font-size:22px;
+
+    color:green;
+
+    font-weight:bold;
+
+}
+
+
+
+.buttons {
+
+
+    margin-top:25px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="header">
+
+
+<h1>
+📷 Scan Student ID
+</h1>
+
+
+
+<a href="/student" class="btn btn-gray">
+
+⬅ Back
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+
+
+
+<div class="schedule-info">
+
+
+<h2>
+
+
+{{schedule.course_code}}
+
+-
+
+{{schedule.course_name}}
+
+
+</h2>
+
+
+
+<p>
+
+
+📅
+
+{{schedule.day_of_week}}
+
+
+<br>
+
+
+⏰
+
+{{schedule.start_time}}
+
+-
+
+{{schedule.end_time}}
+
+
+<br>
+
+
+🏫
+
+Room:
+
+{{schedule.room}}
+
+
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- CAMERA -->
+
+
+<div class="camera-box">
+
+
+<img src="/student/video_feed">
+
+
+</div>
+
+
+
+
+
+
+<!-- RESULT -->
+
+
+<div class="result">
+
+
+<h3>
+Detected Student
+</h3>
+
+
+
+<div id="student_name" class="student-name">
+
+Waiting for scan...
+
+</div>
+
+
+
+<div id="student_id" class="student-id">
+
+ID Number: ----
+
+</div>
+
+
+
+<div id="attendance" class="status">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="buttons">
+
+
+<button
+
+class="btn"
+
+onclick="captureID()">
+
+
+🔍 Scan ID
+
+
+</button>
+
+
+
+
+
+<button
+
+class="btn btn-green"
+
+onclick="nextStudent()">
+
+
+➡ Next Student
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+function captureID(){
+
+
+fetch(
+
+"/student/capture?schedule_id={{schedule_id}}",
+
+{
+
+method:"POST"
+
+}
+
+)
+
+
+
+.then(response => response.json())
+
+
+
+.then(data => {
+
+
+
+console.log(data);
+
+
+
+if(data.status=="success"){
+
+
+
+document.getElementById(
+"student_name"
+).innerHTML = data.name;
+
+
+
+document.getElementById(
+"student_id"
+).innerHTML =
+
+"ID Number: "
+
++
+
+data.id_number;
+
+
+
+document.getElementById(
+"attendance"
+).innerHTML =
+
+"✓ "
+
++
+
+data.attendance;
+
+
+
+}
+
+
+
+else {
+
+
+
+document.getElementById(
+"student_name"
+).innerHTML =
+
+"Student Not Found";
+
+
+
+document.getElementById(
+"attendance"
+).innerHTML =
+
+data.message;
+
+
+
+}
+
+
+
+})
+
+
+
+.catch(error=>{
+
+
+console.log(error);
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+function nextStudent(){
+
+
+
+document.getElementById(
+"student_name"
+).innerHTML =
+
+"Waiting for scan...";
+
+
+
+document.getElementById(
+"student_id"
+).innerHTML =
+
+"ID Number: ----";
+
+
+
+document.getElementById(
+"attendance"
+).innerHTML = "";
+
+
+
+location.reload();
+
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+
+</html>

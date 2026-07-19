@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+
+body {
+
+    background: #f4f7fb;
+
+    color: #1f2937;
+
+}
+
+
+/* HEADER */
+
+.header {
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1e40af
+    );
+
+    color:white;
+
+    padding:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.header h1 {
+
+    font-size:28px;
+
+}
+
+
+
+/* CONTAINER */
+
+.container {
+
+    padding:40px;
+
+}
+
+
+/* CARD */
+
+.card {
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
+}
+
+
+
+/* SCHEDULE */
+
+.schedule-grid {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+
+
+.schedule-card {
+
+
+    border:2px solid #e5e7eb;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    transition:.3s;
+
+}
+
+
+.schedule-card:hover {
+
+
+    transform:translateY(-5px);
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+.schedule-card h3 {
+
+    color:#2563eb;
+
+}
+
+
+
+
+.info {
+
+    margin-top:10px;
+
+    line-height:1.8;
+
+    color:#6b7280;
+
+}
+
+
+
+
+/* BUTTON */
+
+.btn {
+
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    display:inline-block;
+
+}
+
+
+
+.btn:hover {
+
+    background:#1d4ed8;
+
+}
+
+
+
+.btn-green {
+
+    background:#16a34a;
+
+}
+
+
+
+.btn-gray {
+
+    background:#6b7280;
+
+}
+
+
+
+
+
+/* TABLE */
+
+
+table {
+
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+
+}
+
+
+
+th {
+
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px;
+
+}
+
+
+
+td {
+
+
+    padding:15px;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+
+
+tr:hover {
+
+
+    background:#f1f5f9;
+
+}
+
+
+
+
+.badge {
+
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+Student Attendance
+</title>
+
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="header">
+
+
+<h1>
+🎓 Student Attendance
+</h1>
+
+
+<a href="/" class="btn btn-gray">
+Home
+</a>
+
+
+</div>
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+
+<h2>
+Select Your Class Schedule
+</h2>
+
+
+<p>
+Choose the class you want to attend.
+</p>
+
+
+<br>
+
+
+
+
+<div class="schedule-grid">
+
+
+
+{% for s in schedules %}
+
+
+
+<div class="schedule-card">
+
+
+<h3>
+
+{{s.course_code}}
+
+</h3>
+
+
+
+<h4>
+
+{{s.course_name}}
+
+</h4>
+
+
+
+<div class="info">
+
+
+📅
+
+{{s.day_of_week}}
+
+
+<br>
+
+
+⏰
+
+{{s.start_time}}
+
+-
+
+{{s.end_time}}
+
+
+<br>
+
+
+🏫
+
+Room:
+
+{{s.room}}
+
+
+
+</div>
+
+
+<br>
+
+
+
+<form action="/student/select" method="POST">
+
+
+<input
+
+type="hidden"
+
+name="schedule_id"
+
+value="{{s.schedule_id}}">
+
+
+<button class="btn">
+
+Start Attendance
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>
